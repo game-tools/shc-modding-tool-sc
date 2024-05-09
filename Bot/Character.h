@@ -1,0 +1,180 @@
+#pragma once
+
+#include <windows.h>
+#include <map>
+
+namespace Bot {
+	class Character
+	{
+	public:
+		DWORD mWallDecoration; //0x0000
+		DWORD pad_0004;
+		DWORD pad_0005;
+		DWORD pad_0006;
+		DWORD pad_0007;
+		DWORD pad_0008; //0x0004
+		DWORD mCriticalPopularity; //0x0018
+		DWORD mLowestPopularity; //0x001C
+		DWORD mHighestPopularity; //0x0020
+		DWORD mTaxesMin; //0x0024
+		DWORD mTaxesMax; //0x0028
+		DWORD pad_002C; //0x002C
+		DWORD mFarm1; //0x0030
+		DWORD mFarm2; //0x0034
+		DWORD mFarm3; //0x0038
+		DWORD mFarm4; //0x003C
+		DWORD mFarm5; //0x0040
+		DWORD mFarm6; //0x0044
+		DWORD mFarm7; //0x0048
+		DWORD mFarm8; //0x004C
+		DWORD mPopulationPerFarm; //0x0050
+		DWORD mPopulationPerWoodcutter; //0x0054
+		DWORD mPopulationPerQuarry; //0x0058
+		DWORD mPopulationPerIronmine; //0x005C
+		DWORD mPopulationPerPitchrig; //0x0060
+		DWORD mMaxQuarries; //0x0064
+		DWORD mMaxIronmines; //0x0068
+		DWORD mMaxWoodcutters; //0x006C
+		DWORD mMaxPitchrigs; //0x0070
+		DWORD mMaxFarms; //0x0074
+		DWORD mBuildInterval; //0x0078
+		DWORD mResourceRebuildDelay; //0x007C
+		DWORD mMaxFood; //0x0080
+		DWORD mMinimumApples; //0x0084
+		DWORD mMinimumCheese; //0x0088
+		DWORD mMinimumBread; //0x008C
+		DWORD mMinimumWheat; //0x0090
+		DWORD mMinimumHop; //0x0094
+		DWORD mTradeAmountFood; //0x0098
+		DWORD mTradeAmountEquipment; //0x009C
+		DWORD mAIRequestDelay; //0x00A0
+		DWORD mMinimumGoodsRequiredAfterTrade; //0x00A4
+		DWORD mDoubleRationsFoodThreshold; //0x00A8
+		DWORD mMaxWood; //0x00AC
+		DWORD mMaxStone; //0x00B0
+		DWORD mMaxResourceOther; //0x00B4
+		DWORD mMaxEquipment; //0x00B8
+		DWORD mMaxBeer; //0x00BC
+		DWORD mMaxResourceVariance; //0x00C0
+		DWORD mRecruitGoldThreshold; //0x00C4
+		DWORD mBlacksmithSetting; //0x00C8
+		DWORD mFletcherSetting; //0x00CC
+		DWORD mPoleturnerSetting; //0x00D0
+		DWORD mSellResource01; //0x00D4
+		DWORD mSellResource02; //0x00D8
+		DWORD mSellResource03; //0x00DC
+		DWORD mSellResource04; //0x00E0
+		DWORD mSellResource05; //0x00E4
+		DWORD mSellResource06; //0x00E8
+		DWORD mSellResource07; //0x00EC
+		DWORD mSellResource08; //0x00F0
+		DWORD mSellResource09; //0x00F4
+		DWORD mSellResource10; //0x00F8
+		DWORD mSellResource11; //0x00FC
+		DWORD mSellResource12; //0x0100
+		DWORD mSellResource13; //0x0104
+		DWORD mSellResource14; //0x0108
+		DWORD mSellResource15; //0x010C
+		DWORD mDefWallPatrolRallyTime; //0x0110
+		DWORD mDefWallPatrolGroups; //0x0114
+		DWORD mDefSiegeEngineGoldThreshold; //0x0118
+		DWORD mDefSiegeEngineBuildDelay; //0x011C
+		DWORD pad_0120;
+		DWORD pad_0121; //0x0120
+		DWORD mRecruitProbDefDefault; //0x0128
+		DWORD mRecruitProbDefWeak; //0x012C
+		DWORD mRecruitProbDefStrong; //0x0130
+		DWORD mRecruitProbRaidDefault; //0x0134
+		DWORD mRecruitProbRaidWeak; //0x0138
+		DWORD mRecruitProbRaidStrong; //0x013C
+		DWORD mRecruitProbAttackDefault; //0x0140
+		DWORD mRecruitProbAttackWeak; //0x0144
+		DWORD mRecruitProbAttackStrong; //0x0148
+		DWORD mSortieUnitRangedMin; //0x014C
+		DWORD mSortieUnitRanged; //0x0150
+		DWORD mSortieUnitMeleeMin; //0x0154
+		DWORD mSortieUnitMelee; //0x0158
+		DWORD mDefDiggingUnitMax; //0x015C
+		DWORD mDefDiggingUnit; //0x0160
+		DWORD mRecruitInterval; //0x0164
+		DWORD mRecruitIntervalWeak; //0x0168
+		DWORD mRecruitIntervalStrong; //0x016C
+		DWORD mDefTotal; //0x0170
+		DWORD mOuterPatrolGroupsCount; //0x0174
+		DWORD mOuterPatrolGroupsMove; //0x0178
+		DWORD mOuterPatrolRallyDelay; //0x017C
+		DWORD mDefWalls; //0x0180
+		DWORD mDefUnit1; //0x0184
+		DWORD mDefUnit2; //0x0188
+		DWORD mDefUnit3; //0x018C
+		DWORD mDefUnit4; //0x0190
+		DWORD mDefUnit5; //0x0194
+		DWORD mDefUnit6; //0x0198
+		DWORD mDefUnit7; //0x019C
+		DWORD mDefUnit8; //0x01A0
+		DWORD mRaidUnitsBase; //0x01A4
+		DWORD mRaidUnitsRandom; //0x01A8
+		DWORD mRaidUnit1; //0x01AC
+		DWORD mRaidUnit2; //0x01B0
+		DWORD mRaidUnit3; //0x01B4
+		DWORD mRaidUnit4; //0x01B8
+		DWORD mRaidUnit5; //0x01BC
+		DWORD mRaidUnit6; //0x01C0
+		DWORD mRaidUnit7; //0x01C4
+		DWORD mRaidUnit8; //0x01C8
+		DWORD mHarassingSiegeEngine1; //0x01CC
+		DWORD mHarassingSiegeEngine2; //0x01D0
+		DWORD mHarassingSiegeEngine3; //0x01D4
+		DWORD mHarassingSiegeEngine4; //0x01D8
+		DWORD mHarassingSiegeEngine5; //0x01DC
+		DWORD mHarassingSiegeEngine6; //0x01E0
+		DWORD mHarassingSiegeEngine7; //0x01E4
+		DWORD mHarassingSiegeEngine8; //0x01E8
+		DWORD mHarassingSiegeEnginesMax; //0x01EC
+		DWORD mRaidRetargetDelay; //0x01F0
+		DWORD mAttForceBase; //0x01F4
+		DWORD mAttForceRandom; //0x01F8
+		DWORD mAttForceSupportAllyThreshold; //0x01FC
+		DWORD mAttForceRallyPercentage; //0x0200
+		DWORD pad_0204;
+		DWORD pad_0205;
+		DWORD pad_0206;
+		DWORD pad_0207; //0x0204
+		DWORD mSiegeEngine1; //0x0214
+		DWORD mSiegeEngine2; //0x0218
+		DWORD mSiegeEngine3; //0x021C
+		DWORD mSiegeEngine4; //0x0220
+		DWORD mSiegeEngine5; //0x0224
+		DWORD mSiegeEngine6; //0x0228
+		DWORD mSiegeEngine7; //0x022C
+		DWORD mSiegeEngine8; //0x0230
+		DWORD mCowThrowInterval; //0x0234
+		DWORD pad_0238; //0x0238
+		DWORD mAttMaxEngineers; //0x023C
+		DWORD mAttDiggingUnit; //0x0240
+		DWORD mAttDiggingUnitMax; //0x0244
+		DWORD mAttUnitVanguard; //0x0248
+		DWORD mAttUnitVanguardMax; //0x024C
+		DWORD mAttMaxAssassins; //0x0250
+		DWORD mAttMaxLaddermen; //0x0254
+		DWORD mAttMaxTunnelers; //0x0258
+		DWORD mAttUnitPatrol; //0x025C
+		DWORD mAttUnitPatrolMax; //0x0260
+		DWORD mAttUnitPatrolGroupsCount; //0x0264
+		DWORD mAttUnitBackup; //0x0268
+		DWORD mAttUnitBackupMax; //0x026C
+		DWORD mAttUnitBackupGroupsCount; //0x0270
+		DWORD mAttUnitEngage; //0x0274
+		DWORD mAttUnitEngageMax; //0x0278
+		DWORD mAttUnitSiegeDef; //0x027C
+		DWORD mAttUnitSiegeDefMax; //0x0280
+		DWORD mAttUnitSiegeDefGroupsCount; //0x0284
+		DWORD mAttUnitMain1; //0x0288
+		DWORD mAttUnitMain2; //0x028C
+		DWORD mAttUnitMain3; //0x0290
+		DWORD mAttUnitMain4; //0x0294
+		DWORD mAttMaxDefault; //0x0298
+		DWORD mAttMainGroupsCount; //0x029C
+		DWORD mTargetChoice; //0x02A0
+	}; //Size: 0x02A4
+}
