@@ -1,5 +1,6 @@
 #include "Base.h"
 #include "../Globals.h"
+#include "../Config/Instances.h"
 
 DWORD Prices::ArabCost(DWORD unitId) {
 	DWORD cost = 100000;
@@ -43,6 +44,7 @@ Prices::Base::Base() {
 	resource = (Resource*)(modBase + 0xd7cfe4);
 	globalResource = (GlobalResource*)(modBase + 0x2171c8);
 	InjectArabCost();
+	LoadConfig();
 }
 
 void Prices::Base::InjectArabCost() {
@@ -87,4 +89,66 @@ void Prices::Base::SetVanillaCode() {
 	VirtualProtect((LPVOID)(modBase + 0x12ec46), sizeof(vanillaCode), PAGE_EXECUTE_READWRITE, &oldProtect);
 	memcpy((void*)(modBase + 0x12ec46), &vanillaCode, sizeof(vanillaCode));
 	VirtualProtect((LPVOID)(modBase + 0x12ec46), sizeof(vanillaCode), oldProtect, &oldProtect);
+}
+
+void Prices::Base::LoadConfig() {
+	if (Config::pPricesConfig->mData.contains("european")) {
+		int i = 0;
+		for (DWORD price : Config::pPricesConfig->mData["european"]) {
+			*(DWORD*)(&european->archer + i) = price;
+			i++;
+		}
+	}
+
+	if (Config::pPricesConfig->mData.contains("arabian")) {
+		int i = 0;
+		for (DWORD price : Config::pPricesConfig->mData["arabian"]) {
+			*(DWORD*)(&arabian->arabianArcher + i) = price;
+			i++;
+		}
+	}
+
+	if (Config::pPricesConfig->mData.contains("resources")) {
+		int i = 0;
+		for (DWORD price : Config::pPricesConfig->mData["resources"]) {
+			*(DWORD*)(&resource->woodBuy + i) = price;
+			i++;
+		}
+	}
+
+	if (Config::pPricesConfig->mData.contains("globalResources")) {
+		int i = 0;
+		for (DWORD price : Config::pPricesConfig->mData["globalResources"]) {
+			*(DWORD*)(&globalResource->woodBuy + i) = price;
+			i++;
+		}
+	}
+}
+
+void Prices::Base::PrepareConfig() {
+	Config::pPricesConfig->mDataSave = {};
+
+	DWORD europCost[7];
+	for (int i = 0; i < 7; i++) {
+		europCost[i] = *(DWORD*)(&european->archer + i);
+	}
+	Config::pPricesConfig->mDataSave["european"] = europCost;
+
+	DWORD arabCost[7];
+	for (int i = 0; i < 7; i++) {
+		arabCost[i] = *(DWORD*)(&arabian->arabianArcher + i);
+	}
+	Config::pPricesConfig->mDataSave["arabian"] = arabCost;
+
+	DWORD resourceCost[46];
+	for (int i = 0; i < 46; i++) {
+		resourceCost[i] = *(DWORD*)(&resource->woodBuy + i);
+	}
+	Config::pPricesConfig->mDataSave["resources"] = resourceCost;
+
+	DWORD globalResourceCost[49];
+	for (int i = 0; i < 49; i++) {
+		globalResourceCost[i] = *(DWORD*)(&globalResource->woodBuy + i);
+	}
+	Config::pPricesConfig->mDataSave["globalResources"] = globalResourceCost;
 }

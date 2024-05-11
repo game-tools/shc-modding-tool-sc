@@ -1,5 +1,6 @@
 #include "StartGoodsGui.h"
 #include "../Start/StartInstances.h"
+#include "../Config/Instances.h"
 
 #include "../imgui/imgui.h"
 
@@ -84,6 +85,48 @@ void startGoodsGui::Render() noexcept {
 				i++;
 			}
 			ImGui::EndTable();
+		}
+
+		ImGui::SeparatorText("Config");
+
+		static int selected = -1;
+		static char buf[64] = "";
+
+		ImGui::Text("Default config:");
+		ImGui::SameLine();
+		ImGui::Text(Config::pStartGoodsConfig->mDefaultName.c_str());
+		ImGui::SameLine();
+
+		if (ImGui::Button("Load Selected")) {
+			Config::pStartGoodsConfig->Load(Config::pStartGoodsConfig->savedConfigNames[selected]);
+			Start::LoadGoodsConfig();
+		}
+
+		if (ImGui::Button("Save")) {
+			Start::PrepareGoodsConfig();
+			Config::pStartGoodsConfig->Save((std::string)buf);
+		}
+
+		ImGui::SameLine();
+
+		if (ImGui::Button("Save as Default")) {
+			Start::PrepareGoodsConfig();
+			Config::pStartGoodsConfig->SaveDefault((std::string)buf);
+		}
+
+		ImGui::SameLine();
+
+		if (ImGui::Button("Delete Selected")) {
+			Config::pStartGoodsConfig->Delete(Config::pStartGoodsConfig->savedConfigNames[selected]);
+		}
+
+		ImGui::InputText("Save file name", buf, 64, ImGuiInputTextFlags_CharsNoBlank);
+
+		byte n = 0;
+		for (std::basic_string<TCHAR> configFileName : Config::pStartGoodsConfig->savedConfigNames) {
+			if (ImGui::Selectable(configFileName.c_str(), selected == n))
+				selected = n;
+			n++;
 		}
 
 		ImGui::EndChild();

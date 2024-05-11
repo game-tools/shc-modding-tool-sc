@@ -1,6 +1,7 @@
 #pragma once
 
 #include <map>
+#include <string>
 
 #include "Arabian.h"
 #include "European.h"
@@ -20,5 +21,7 @@ namespace Prices {
 		Base();
 		void InjectArabCost();
 		void SetVanillaCode();
+		void LoadConfig();
+		void PrepareConfig();
 	};
 }

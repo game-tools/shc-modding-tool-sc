@@ -10,7 +10,7 @@
 
 void pricesGui::Render() noexcept {
 	{
-		ImGui::BeginChild("Units Cost", ImVec2(ImGui::GetContentRegionAvail().x * 0.30f, 400));
+		ImGui::BeginChild("Units Cost", ImVec2(ImGui::GetContentRegionAvail().x * 0.30f, 600));
 
 		static ImGuiTableFlags europCostFlags = 0;
 		europCostFlags |= ImGuiTableFlags_RowBg;
@@ -66,6 +66,48 @@ void pricesGui::Render() noexcept {
 				i++;
 			}
 			ImGui::EndTable();
+		}
+
+		ImGui::SeparatorText("Config");
+
+		static int selected = -1;
+		static char buf[64] = "";
+
+		ImGui::Text("Default config:");
+		ImGui::SameLine();
+		ImGui::Text(Config::pPricesConfig->mDefaultName.c_str());
+		ImGui::SameLine();
+
+		if (ImGui::Button("Load Selected")) {
+			Config::pPricesConfig->Load(Config::pPricesConfig->savedConfigNames[selected]);
+			prices->LoadConfig();
+		}
+
+		if (ImGui::Button("Save")) {
+			prices->PrepareConfig();
+			Config::pPricesConfig->Save((std::string)buf);
+		}
+
+		ImGui::SameLine();
+
+		if (ImGui::Button("Save as Default")) {
+			prices->PrepareConfig();
+			Config::pPricesConfig->SaveDefault((std::string)buf);
+		}
+
+		ImGui::SameLine();
+
+		if (ImGui::Button("Delete Selected")) {
+			Config::pPricesConfig->Delete(Config::pPricesConfig->savedConfigNames[selected]);
+		}
+
+		ImGui::InputText("Save file name", buf, 64, ImGuiInputTextFlags_CharsNoBlank);
+
+		byte n = 0;
+		for (std::basic_string<TCHAR> configFileName : Config::pPricesConfig->savedConfigNames) {
+			if (ImGui::Selectable(configFileName.c_str(), selected == n))
+				selected = n;
+			n++;
 		}
 
 		ImGui::EndChild();

@@ -1,5 +1,6 @@
 #include "StartInstances.h"
 #include "../Globals.h"
+#include "../Config/Instances.h"
 
 namespace Start {
 	std::vector<Resources*> startResources;
@@ -26,9 +27,95 @@ namespace Start {
 		}
 
 		startTroops["Player"] = (Troops*)(modBase + 0x215448 + startTroopsSize * 17);
+
+		LoadGoodsConfig();
+		LoadTroopsConfig();
 	};
 
-	void DestroyInstances() {
+	void LoadGoodsConfig() {
+		if (Config::pStartGoodsConfig->mData.contains("normalResources")) {
+			int i = 0;
+			for (DWORD count : Config::pStartGoodsConfig->mData["normalResources"]) {
+				*(DWORD*)(&startResources[0]->wood + i) = count;
+				i++;
+			}
+		}
 
-	};
+		if (Config::pStartGoodsConfig->mData.contains("crusadeResources")) {
+			int i = 0;
+			for (DWORD count : Config::pStartGoodsConfig->mData["crusadeResources"]) {
+				*(DWORD*)(&startResources[1]->wood + i) = count;
+				i++;
+			}
+		}
+
+		if (Config::pStartGoodsConfig->mData.contains("skirmishResources")) {
+			int i = 0;
+			for (DWORD count : Config::pStartGoodsConfig->mData["skirmishResources"]) {
+				*(DWORD*)(&startResources[2]->wood + i) = count;
+				i++;
+			}
+		}
+
+		if (Config::pStartGoodsConfig->mData.contains("startGold")) {
+			int i = 0;
+			for (DWORD count : Config::pStartGoodsConfig->mData["startGold"]) {
+				*(DWORD*)(&startGold->gold1 + i) = count;
+				i++;
+			}
+		}
+	}
+
+	void PrepareGoodsConfig() {
+		Config::pStartGoodsConfig->mDataSave = {};
+
+		DWORD start1[23];
+		for (int i = 0; i < 23; i++) {
+			start1[i] = *(DWORD*)(&startResources[0]->wood + i);
+		}
+		Config::pStartGoodsConfig->mDataSave["normalResources"] = start1;
+
+		DWORD start2[23];
+		for (int i = 0; i < 23; i++) {
+			start2[i] = *(DWORD*)(&startResources[1]->wood + i);
+		}
+		Config::pStartGoodsConfig->mDataSave["crusaderResources"] = start2;
+
+		DWORD start3[23];
+		for (int i = 0; i < 23; i++) {
+			start3[i] = *(DWORD*)(&startResources[2]->wood + i);
+		}
+		Config::pStartGoodsConfig->mDataSave["skirmishResources"] = start3;
+
+		DWORD startGoldBuff[26];
+		for (int i = 0; i < 26; i++) {
+			startGoldBuff[i] = *(DWORD*)(&startGold->gold1 + i);
+		}
+		Config::pStartGoodsConfig->mDataSave["startGold"] = startGoldBuff;
+	}
+
+	void LoadTroopsConfig() {
+		for (const std::basic_string<TCHAR>& characterName : characterNames)
+		{
+			if (Config::pStartTroopsConfig->mData.contains(characterName)) {
+				int i = 0;
+				for (DWORD value : Config::pStartTroopsConfig->mData[characterName]) {
+					*(DWORD*)(&startTroops[characterName]->archerNormal + i) = value;
+					i++;
+				}
+			}
+		}
+	}
+
+	void PrepareTroopsConfig() {
+		Config::pStartTroopsConfig->mDataSave = {};
+
+		for (const std::basic_string<TCHAR>& characterName : characterNames) {
+			DWORD values[60];
+			for (int i = 0; i < 60; i++) {
+				values[i] = *(DWORD*)(&startTroops[characterName]->archerNormal + i);
+			}
+			Config::pStartTroopsConfig->mDataSave[characterName] = values;
+		}
+	}
 }

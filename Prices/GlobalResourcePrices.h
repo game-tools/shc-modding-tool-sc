@@ -28,11 +28,9 @@ namespace Prices {
 		DWORD swordBuy;
 		DWORD leatherArmorBuy;
 		DWORD armorBuy;
-
 		DWORD sth1;
 		DWORD sth2;
 		DWORD sth3;
-		
 		DWORD woodSell;
 		DWORD hopSell;
 		DWORD stoneSell;

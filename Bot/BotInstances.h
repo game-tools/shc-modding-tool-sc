@@ -12,4 +12,6 @@ namespace Bot {
 	extern const char* properties[];
 
 	void InitializeInstances();
+	void LoadConfig();
+	void PrepareConfig();
 }

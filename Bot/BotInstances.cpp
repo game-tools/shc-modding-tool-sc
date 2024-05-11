@@ -1,4 +1,5 @@
 #include "BotInstances.h"
+#include "../Config/Instances.h"
 
 namespace Bot {
 	std::map<std::basic_string<TCHAR>, Character*> characters;
@@ -14,6 +15,33 @@ namespace Bot {
 		{
 			characters[characterName] = (Character*)(modBase + firstBotCharacterAddress + botCharacterSize * index);
 			index++;
+		}
+
+		LoadConfig();
+	}
+
+	void LoadConfig() {
+		for (const std::basic_string<TCHAR>& characterName : characterNames)
+		{
+			if (Config::pBotSettingsConfig->mData.contains(characterName)) {
+				byte index = 0;
+				for (DWORD value : Config::pBotSettingsConfig->mData[characterName]) {
+					*(DWORD*)(&characters[characterName]->mWallDecoration + index) = value;
+					index++;
+				}
+			}
+		}
+	}
+
+	void PrepareConfig() {
+		Config::pBotSettingsConfig->mDataSave = {};
+
+		for (const std::basic_string<TCHAR>& characterName : characterNames) {
+			DWORD values[169];
+			for (int i = 0; i < 169; i++) {
+				values[i] = *(DWORD*)(&characters[characterName]->mWallDecoration + i);
+			}
+			Config::pBotSettingsConfig->mDataSave[characterName] = values;
 		}
 	}
 }

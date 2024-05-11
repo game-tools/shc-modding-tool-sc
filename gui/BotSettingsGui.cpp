@@ -3,6 +3,7 @@
 #include "BotSettingsGui.h"
 #include "../Bot/BotInstances.h"
 #include "../Bot/Character.h"
+#include "../Config/Instances.h"
 
 #include "../imgui/imgui.h"
 
@@ -68,6 +69,48 @@ void botSettingsGui::Render() noexcept {
 	}
 	ImGui::SameLine();
 	ImGui::Text(currentBotDifficulty.c_str());
+
+	ImGui::SeparatorText("Config");
+
+	static int selected = -1;
+	static char buf[64] = "";
+
+	ImGui::Text("Default config:");
+	ImGui::SameLine();
+	ImGui::Text(Config::pBotSettingsConfig->mDefaultName.c_str());
+	ImGui::SameLine();
+
+	if (ImGui::Button("Load")) {
+		Config::pBotSettingsConfig->Load(Config::pBotSettingsConfig->savedConfigNames[selected]);
+		Bot::LoadConfig();
+	}
+
+	if (ImGui::Button("Save")) {
+		Bot::PrepareConfig();
+		Config::pBotSettingsConfig->Save((std::string)buf);
+	}
+
+	ImGui::SameLine();
+
+	if (ImGui::Button("Save as Default")) {
+		Bot::PrepareConfig();
+		Config::pBotSettingsConfig->SaveDefault((std::string)buf);
+	}
+
+	ImGui::SameLine();
+
+	if (ImGui::Button("Delete Selected")) {
+		Config::pBotSettingsConfig->Delete(Config::pBotSettingsConfig->savedConfigNames[selected]);
+	}
+
+	ImGui::InputText("Save file name", buf, 64, ImGuiInputTextFlags_CharsNoBlank);
+
+	byte n = 0;
+	for (std::basic_string<TCHAR> configFileName : Config::pBotSettingsConfig->savedConfigNames) {
+		if (ImGui::Selectable(configFileName.c_str(), selected == n))
+			selected = n;
+		n++;
+	}
 }
 
 void botSettingsGui::ModifyBots(float coeff1, float coeff2) {

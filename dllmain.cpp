@@ -11,6 +11,7 @@
 #include "gui/gui.h"
 #include "Market.h"
 #include "Unit.h"
+#include "Config/DefaultInstance.h"
 #include "Config/Instances.h"
 #include "Bot/BotInstances.h"
 #include "Functions/Definitions.h"
@@ -39,6 +40,7 @@ DWORD WINAPI MainThread(LPVOID param) {
 	modBase = (DWORD)GetModuleHandle(NULL);
 	setDllPath();
 
+	Config::InitializeInstanceDefault();
 	Config::InitializeInstances();
 	Bot::InitializeInstances();
 	Functions::InitializeDefinitions();
@@ -115,6 +117,7 @@ DWORD WINAPI MainThread(LPVOID param) {
 	gui::DestroyHWindow();
 
 	Config::DeleteInstances();
+	Config::DeleteInstanceDefault();
 	DeletePrices();
 
 	FreeLibraryAndExitThread((HINSTANCE)param, 0);

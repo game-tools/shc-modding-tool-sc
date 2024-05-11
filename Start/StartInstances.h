@@ -18,5 +18,8 @@ namespace Start {
 	extern const char* startTroopsLabels[];
 
 	void InitializeInstances();
-	void DestroyInstances();
+	void LoadGoodsConfig();
+	void PrepareGoodsConfig();
+	void LoadTroopsConfig();
+	void PrepareTroopsConfig();
 }

@@ -70,13 +70,19 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\shc-modding-tool</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\shc-modding-tool</OutDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;SHCMODDINGTOOLSC_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -147,7 +153,10 @@
     <ClInclude Include="bonuses.h" />
     <ClInclude Include="Bot\BotInstances.h" />
     <ClInclude Include="Bot\Character.h" />
+    <ClInclude Include="Config\DefaultConfig.h" />
+    <ClInclude Include="Config\DefaultInstance.h" />
     <ClInclude Include="Config\Instances.h" />
+    <ClInclude Include="Config\Operation.h" />
     <ClInclude Include="Config\Resources.h" />
     <ClInclude Include="Config\Units.h" />
     <ClInclude Include="framework.h" />
@@ -190,7 +199,10 @@
   <ItemGroup>
     <ClCompile Include="Bot\BotInstances.cpp" />
     <ClCompile Include="Bot\Character.cpp" />
+    <ClCompile Include="Config\DefaultConfig.cpp" />
+    <ClCompile Include="Config\DefaultInstance.cpp" />
     <ClCompile Include="Config\Instances.cpp" />
+    <ClCompile Include="Config\Operation.cpp" />
     <ClCompile Include="Config\Resources.cpp" />
     <ClCompile Include="Config\Units.cpp" />
     <ClCompile Include="dllmain.cpp" />

@@ -1,5 +1,6 @@
 #include "StartTroopsGui.h"
 #include "../Start/StartInstances.h"
+#include "../Config/Instances.h"
 
 #include "../imgui/imgui.h"
 
@@ -39,5 +40,46 @@ void startTroopsGui::Render() noexcept {
 			}
 		}
 		ImGui::EndTable();
+	}
+	ImGui::SeparatorText("Config");
+
+	static int selected = -1;
+	static char buf[64] = "";
+
+	ImGui::Text("Default config:");
+	ImGui::SameLine();
+	ImGui::Text(Config::pStartTroopsConfig->mDefaultName.c_str());
+	ImGui::SameLine();
+
+	if (ImGui::Button("Load Selected")) {
+		Config::pStartTroopsConfig->Load(Config::pStartTroopsConfig->savedConfigNames[selected]);
+		Start::LoadTroopsConfig();
+	}
+
+	if (ImGui::Button("Save")) {
+		Start::PrepareTroopsConfig();
+		Config::pStartTroopsConfig->Save((std::string)buf);
+	}
+
+	ImGui::SameLine();
+
+	if (ImGui::Button("Save as Default")) {
+		Start::PrepareTroopsConfig();
+		Config::pStartTroopsConfig->SaveDefault((std::string)buf);
+	}
+
+	ImGui::SameLine();
+
+	if (ImGui::Button("Delete Selected")) {
+		Config::pStartTroopsConfig->Delete(Config::pStartTroopsConfig->savedConfigNames[selected]);
+	}
+
+	ImGui::InputText("Save file name", buf, 64, ImGuiInputTextFlags_CharsNoBlank);
+
+	byte n = 0;
+	for (std::basic_string<TCHAR> configFileName : Config::pStartTroopsConfig->savedConfigNames) {
+		if (ImGui::Selectable(configFileName.c_str(), selected == n))
+			selected = n;
+		n++;
 	}
 }

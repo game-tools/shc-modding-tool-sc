@@ -14,7 +14,7 @@ void setDllPath()
 }
 
 void InitializePrices() {
-	prices = new Prices::Base;
+	prices = new Prices::Base();
 }
 
 void DeletePrices() {
