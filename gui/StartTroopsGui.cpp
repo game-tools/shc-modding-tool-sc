@@ -74,6 +74,12 @@ void startTroopsGui::Render() noexcept {
 		Config::pStartTroopsConfig->Delete(Config::pStartTroopsConfig->savedConfigNames[selected]);
 	}
 
+	ImGui::SameLine();
+
+	if (ImGui::Button("Remove Default")) {
+		Config::pStartTroopsConfig->RemoveDefault();
+	}
+
 	ImGui::InputText("Save file name", buf, 64, ImGuiInputTextFlags_CharsNoBlank);
 
 	byte n = 0;

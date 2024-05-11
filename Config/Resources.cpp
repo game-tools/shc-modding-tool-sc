@@ -3,7 +3,6 @@
 namespace Config {
 	Resources::Resources() {
 		Load();
-		SetToSell();
 		SetIds();
 	}
 
@@ -12,11 +11,6 @@ namespace Config {
 		m_data = json::parse(f);
 
 		f.close();
-	}
-
-	void Resources::SetToSell() {
-		for (int resource_id : m_data["resourcesToSell"])
-			m_to_sell_map[resource_id] = m_data["sellTo"][std::to_string(resource_id)];
 	}
 
 	void Resources::SetIds() {

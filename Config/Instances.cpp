@@ -8,15 +8,17 @@ namespace Config {
 	Operation* pBotSettingsConfig;
 	Operation* pStartGoodsConfig;
 	Operation* pStartTroopsConfig;
+	Operation* pMarketConfig;
 
 	void InitializeInstances() {
 		pResourcesConfig = new Resources();
 		pUnitsConfig = new Units();
 
-		pPricesConfig = new Operation("Prices");
-		pBotSettingsConfig = new Operation("BotSettings");
-		pStartGoodsConfig = new Operation("StartGoods");
-		pStartTroopsConfig = new Operation("StartTroops");
+		pPricesConfig = new Operation("Prices", false);
+		pBotSettingsConfig = new Operation("BotSettings", false);
+		pStartGoodsConfig = new Operation("StartGoods", false);
+		pStartTroopsConfig = new Operation("StartTroops", false);
+		pMarketConfig = new Operation("Market", true);
 	}
 
 	void DeleteInstances() {
@@ -27,5 +29,6 @@ namespace Config {
 		delete pBotSettingsConfig;
 		delete pStartGoodsConfig;
 		delete pStartTroopsConfig;
+		delete pMarketConfig;
 	}
 }

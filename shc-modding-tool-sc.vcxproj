@@ -150,6 +150,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="addresses.h" />
+    <ClInclude Include="Automations\AutomationsInstances.h" />
+    <ClInclude Include="Automations\MarketAutomations.h" />
     <ClInclude Include="bonuses.h" />
     <ClInclude Include="Bot\BotInstances.h" />
     <ClInclude Include="Bot\Character.h" />
@@ -163,6 +165,7 @@
     <ClInclude Include="Functions\Definitions.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="gui\ActionsGui.h" />
+    <ClInclude Include="gui\AutomationsGui.h" />
     <ClInclude Include="gui\BotSettingsGui.h" />
     <ClInclude Include="gui\gui.h" />
     <ClInclude Include="gui\MainGui.h" />
@@ -197,6 +200,8 @@
     <ClInclude Include="Unit.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Automations\AutomationsInstances.cpp" />
+    <ClCompile Include="Automations\MarketAutomations.cpp" />
     <ClCompile Include="Bot\BotInstances.cpp" />
     <ClCompile Include="Bot\Character.cpp" />
     <ClCompile Include="Config\DefaultConfig.cpp" />
@@ -209,6 +214,7 @@
     <ClCompile Include="Functions\Definitions.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="gui\ActionsGui.cpp" />
+    <ClCompile Include="gui\AutomationsGui.cpp" />
     <ClCompile Include="gui\BotSettingsGui.cpp" />
     <ClCompile Include="gui\gui.cpp" />
     <ClCompile Include="gui\MainGui.cpp" />

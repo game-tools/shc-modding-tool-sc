@@ -1,5 +1,4 @@
 #include "ResourcesGui.h"
-#include "../Market.h"
 #include "../Bot/Character.h"
 #include "../Config/Instances.h"
 #include "../Bot/BotInstances.h"
@@ -10,11 +9,6 @@ void resourcesGui::Render(std::map<DWORD, Player*> playerMap, DWORD selectedPlay
 {
 	{
 		ImGui::BeginChild("Child1", ImVec2(ImGui::GetContentRegionAvail().x * 0.65f, 400));
-		if (ImGui::Button("Sell Resources"))
-		{
-			Market market;
-			market.sell();
-		}
 		if (ImGui::Button("Add 10000 Gold"))
 		{
 			DWORD goldAddress = modBase + 0xd2b0b8 + 0x3124c + 0x39f4 * (selectedPlayerNumber + 1);

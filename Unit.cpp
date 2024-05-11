@@ -18,6 +18,4 @@ void Unit::recruit(std::string numpadNumber)
 		RecruitUnit(4, Config::pUnitsConfig->mData["recruitIdNumpad" + numpadNumber], sthId);
 		Sleep(10);
 	}
-
-	printf("RECRUITED from class\n");
 }

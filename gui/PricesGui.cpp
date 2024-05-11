@@ -101,6 +101,12 @@ void pricesGui::Render() noexcept {
 			Config::pPricesConfig->Delete(Config::pPricesConfig->savedConfigNames[selected]);
 		}
 
+		ImGui::SameLine();
+
+		if (ImGui::Button("Remove Default")) {
+			Config::pPricesConfig->RemoveDefault();
+		}
+
 		ImGui::InputText("Save file name", buf, 64, ImGuiInputTextFlags_CharsNoBlank);
 
 		byte n = 0;

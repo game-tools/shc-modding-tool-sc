@@ -1,8 +1,10 @@
 #include <map>
+#include <windows.h>
 
 #include "pch.h"
 #include "Market.h"
 #include "Config/Instances.h"
+#include "Automations/AutomationsInstances.h"
 
 typedef int(__cdecl* _MarketOperate)(int actionType);
 
@@ -10,27 +12,30 @@ _MarketOperate MarketOperate;
 
 Market::Market()
 {
-	mSellResourcesInterval = Config::pResourcesConfig->m_data["sellResourcesInterval"];
+	mSellResourcesInterval = &Automations::pMarketAutomations->mSellResourcesInterval;
 	mCurrentResourcesTimer = 0;
+	mAutoSelling = false;
 
 	MarketOperate = (_MarketOperate)(modBase + 0x67040);
 }
 
-void Market::sell()
+void Market::Sell()
 {
 	DWORD resourceAmount;
 	DWORD* resourceIdAddress = (DWORD*)(modBase + 0xd5f814);
 
-	for (std::map<DWORD, DWORD>::iterator it = Config::pResourcesConfig->m_to_sell_map.begin(); it != Config::pResourcesConfig->m_to_sell_map.end(); it++) {
-		resourceAmount = *(DWORD*)(modBase + 0xd5fcc4 + (0x4 * (it->first - 2)));
+	byte i = 0;
+	while (Automations::resourceNames[i] != NULL) {
+		if (Automations::pMarketAutomations->mAutoSelling[i * 2 + 1] == 1) {
+			resourceAmount = *(DWORD*)(modBase + 0xd5fcc4 + (0x4 * i));
 
-		while (resourceAmount > it->second) {
-			*resourceIdAddress = it->first;
-			MarketOperate(1);
-			Sleep(25);
-			resourceAmount = *(DWORD*)(modBase + 0xd5fcc4 + (0x4 * (it->first - 2)));
+			while (resourceAmount > Automations::pMarketAutomations->mAutoSelling[i * 2]) {
+				*resourceIdAddress = i + 2;
+				MarketOperate(1);
+				Sleep(25);
+				resourceAmount = *(DWORD*)(modBase + 0xd5fcc4 + (0x4 * i));
+			}
 		}
+		i++;
 	}
-
-	printf("SOLD from class\n");
 }

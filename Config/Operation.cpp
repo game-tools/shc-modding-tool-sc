@@ -1,10 +1,13 @@
 #include "Operation.h"
 
 namespace Config {
-	Operation::Operation(std::basic_string<TCHAR> configType) {
+	Operation::Operation(std::basic_string<TCHAR> configType, bool loadIfNoDefault) {
 		mConfigType = configType;
 		mDefaultName = "";
 		LoadDefault();
+		if (loadIfNoDefault && !pDefaultConfig->mData.contains(mConfigType)) {
+			Load("vanilla.json");
+		}
 		GetSavedConfigNames();
 	}
 
@@ -53,5 +56,11 @@ namespace Config {
 		}
 
 		GetSavedConfigNames();
+	}
+
+	void Operation::RemoveDefault() {
+		pDefaultConfig->mData.erase(mConfigType);
+		pDefaultConfig->Save();
+		mDefaultName = "";
 	}
 }

@@ -120,6 +120,12 @@ void startGoodsGui::Render() noexcept {
 			Config::pStartGoodsConfig->Delete(Config::pStartGoodsConfig->savedConfigNames[selected]);
 		}
 
+		ImGui::SameLine();
+
+		if (ImGui::Button("Remove Default")) {
+			Config::pStartGoodsConfig->RemoveDefault();
+		}
+
 		ImGui::InputText("Save file name", buf, 64, ImGuiInputTextFlags_CharsNoBlank);
 
 		byte n = 0;

@@ -153,6 +153,15 @@
     <ClInclude Include="Config\Operation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="gui\AutomationsGui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Automations\MarketAutomations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Automations\AutomationsInstances.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -273,6 +282,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Config\Operation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\AutomationsGui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Automations\MarketAutomations.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Automations\AutomationsInstances.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

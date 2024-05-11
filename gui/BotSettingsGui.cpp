@@ -16,7 +16,7 @@ void botSettingsGui::Render() noexcept {
 	botSettingsTableFlags |= ImGuiTableFlags_SizingFixedFit;
 	botSettingsTableFlags |= ImGuiTableFlags_ScrollX;
 
-	const float textBaseHeight = ImGui::GetTextLineHeightWithSpacing();;
+	const float textBaseHeight = ImGui::GetTextLineHeightWithSpacing();
 	ImVec2 size = ImVec2(0.0f, textBaseHeight * 24);
 	if (ImGui::BeginTable("Bot Settings", 170, botSettingsTableFlags, size))
 	{
@@ -101,6 +101,12 @@ void botSettingsGui::Render() noexcept {
 
 	if (ImGui::Button("Delete Selected")) {
 		Config::pBotSettingsConfig->Delete(Config::pBotSettingsConfig->savedConfigNames[selected]);
+	}
+
+	ImGui::SameLine();
+
+	if (ImGui::Button("Remove Default")) {
+		Config::pBotSettingsConfig->RemoveDefault();
 	}
 
 	ImGui::InputText("Save file name", buf, 64, ImGuiInputTextFlags_CharsNoBlank);

@@ -21,12 +21,13 @@ namespace Config {
 		std::basic_string<TCHAR> mDefaultName;
 		std::vector<std::basic_string<TCHAR>> savedConfigNames;
 	public:
-		Operation(std::basic_string<TCHAR> configType);
+		Operation(std::basic_string<TCHAR> configType, bool loadIfNoDefault);
 		void Load(std::basic_string<TCHAR> selectedFilename);
 		void LoadDefault();
 		void Save(std::basic_string<TCHAR> saveFilename);
 		void SaveDefault(std::basic_string<TCHAR> saveFilename);
 		void GetSavedConfigNames();
 		void Delete(std::basic_string<TCHAR> selectedFilename);
+		void RemoveDefault();
 	};
 }

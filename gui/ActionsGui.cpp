@@ -9,9 +9,11 @@ void actionsGui::Render(std::map<DWORD, Player*> playerMap) noexcept {
 	actionsTableFlags |= ImGuiTableFlags_SizingFixedFit;
 	actionsTableFlags |= ImGuiTableFlags_ScrollX;
 
-	if (ImGui::BeginTable("Player Actions", 2, actionsTableFlags))
+	const float textBaseHeight = ImGui::GetTextLineHeightWithSpacing();
+	ImVec2 size = ImVec2(0.0f, textBaseHeight * 12);
+	if (ImGui::BeginTable("Player Actions", 2, actionsTableFlags, size))
 	{
-		ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_WidthFixed, 150.0f);
+		ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_WidthFixed, 200.0f);
 		ImGui::TableSetupColumn("Instant Recruits", ImGuiTableColumnFlags_WidthFixed, 150.0f);
 		ImGui::TableHeadersRow();
 

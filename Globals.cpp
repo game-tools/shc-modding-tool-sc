@@ -4,6 +4,17 @@ DWORD modBase;
 std::basic_string<TCHAR> dllPathStr;
 Prices::Base* prices;
 std::basic_string<TCHAR> characterNames[16] = { "Rat", "Snake", "Pig", "Wolf", "Saladin", "Caliph", "Sultan", "Richard", "Frederick", "Phillip", "Wazir", "Emir", "Nizar", "Sheriff", "Marshal", "Abbot" };
+Market* market;
+
+std::chrono::steady_clock::time_point start;
+std::chrono::steady_clock::time_point stop;
+std::chrono::milliseconds duration;
+
+DWORD* pCurrentBottomView;
+DWORD* pGamePaused;
+DWORD* pGameOptionsActive;
+DWORD gameTimeStart;
+DWORD gameTimeStop;
 
 void setDllPath()
 {
@@ -13,11 +24,37 @@ void setDllPath()
 	dllPathStr.resize(dllPathStr.rfind('\\'));
 }
 
-void InitializePrices() {
+void InitializeGlobals() {
 	prices = new Prices::Base();
+	market = new Market();
 }
 
-void DeletePrices() {
+void DeleteGlobals() {
 	prices->SetVanillaCode();
 	delete prices;
+	delete market;
+}
+
+void ChronoStart() {
+	gameTimeStart = *(DWORD*)(modBase + 0xb98adc);
+	start = std::chrono::high_resolution_clock::now();
+}
+
+void ChronoStop() {
+	stop = std::chrono::high_resolution_clock::now();
+	gameTimeStop = *(DWORD*)(modBase + 0xb98adc);
+}
+
+void ChronoDuration() {
+	duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+}
+
+void InitializeInGameVariables() {
+	pCurrentBottomView = (DWORD*)(modBase + 0x1bea0f8);
+	pGamePaused = (DWORD*)(modBase + 0x9f477c);
+	pGameOptionsActive = (DWORD*)(modBase + 0x1f52bc);
+}
+
+bool ShouldAddTime() {
+	return *pCurrentBottomView > 0 && *pGamePaused == 0 && *pGameOptionsActive == 0 && gameTimeStart != gameTimeStop;
 }
