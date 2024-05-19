@@ -14,6 +14,8 @@ extern std::basic_string<TCHAR> dllPathStr;
 extern Prices::Base* prices;
 extern std::basic_string<TCHAR> characterNames[16];
 extern Market* market;
+extern DWORD* pMaxUnits;
+extern DWORD codeProtect;
 
 extern std::chrono::steady_clock::time_point start;
 extern std::chrono::steady_clock::time_point stop;

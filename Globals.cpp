@@ -5,6 +5,8 @@ std::basic_string<TCHAR> dllPathStr;
 Prices::Base* prices;
 std::basic_string<TCHAR> characterNames[16] = { "Rat", "Snake", "Pig", "Wolf", "Saladin", "Caliph", "Sultan", "Richard", "Frederick", "Phillip", "Wazir", "Emir", "Nizar", "Sheriff", "Marshal", "Abbot" };
 Market* market;
+DWORD* pMaxUnits;
+DWORD codeProtect;
 
 std::chrono::steady_clock::time_point start;
 std::chrono::steady_clock::time_point stop;
@@ -27,12 +29,15 @@ void setDllPath()
 void InitializeGlobals() {
 	prices = new Prices::Base();
 	market = new Market();
+	VirtualProtect((LPVOID)(modBase + 0x59e11), sizeof(0x4), PAGE_EXECUTE_READWRITE, &codeProtect);
+	pMaxUnits = (DWORD*)(modBase + 0x59e11);
 }
 
 void DeleteGlobals() {
 	prices->SetVanillaCode();
 	delete prices;
 	delete market;
+	VirtualProtect((LPVOID)(modBase + 0x59e11), sizeof(0x4), codeProtect, &codeProtect);
 }
 
 void ChronoStart() {

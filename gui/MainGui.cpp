@@ -9,11 +9,12 @@
 #include "StartTroopsGui.h"
 #include "ActionsGui.h"
 #include "AutomationsGui.h"
+#include "UnitPropertiesGui.h"
 #include "../Player/Player.h"
 
 #include "../imgui/imgui.h"
 
-enum ViewType { ResourcesGui, UnitsGui, BotSettingsGui, PricesGui, StartGoodsGui, StartTroopsGui, ActionsGui, AutomationsGui };
+enum ViewType { ResourcesGui, UnitsGui, BotSettingsGui, PricesGui, StartGoodsGui, StartTroopsGui, ActionsGui, AutomationsGui, UnitPropertiesGui };
 ViewType viewType = ResourcesGui;
 
 std::map<DWORD, Player*> playerMap;
@@ -30,6 +31,7 @@ void MainGui::Render() noexcept {
 		if (ImGui::MenuItem("Starting Troops")) { viewType = StartTroopsGui; }
 		if (ImGui::MenuItem("Actions")) { viewType = ActionsGui; }
 		if (ImGui::MenuItem("Automations")) { viewType = AutomationsGui; }
+		if (ImGui::MenuItem("Unit Properties")) { viewType = UnitPropertiesGui; }
 		ImGui::EndMenuBar();
 	}
 
@@ -110,6 +112,10 @@ void MainGui::Render() noexcept {
 	}
 	case AutomationsGui: {
 		automationsGui::Render();
+		break;
+	}
+	case UnitPropertiesGui: {
+		unitPropertiesGui::Render();
 		break;
 	}
 	}

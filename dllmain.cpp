@@ -16,6 +16,8 @@
 #include "Bot/BotInstances.h"
 #include "Functions/Definitions.h"
 #include "Start/StartInstances.h"
+#include "Units/UnitsInstances.h"
+#include "Actions/ActionsBase.h"
 
 BOOLEAN autoTaxes = false;
 BOOLEAN visible = true;
@@ -44,6 +46,8 @@ DWORD WINAPI MainThread(LPVOID param) {
 	Functions::InitializeDefinitions();
 	InitializeGlobals();
 	Start::InitializeInstances();
+	Units::InitializeInstances();
+	Actions::InitializeInstances();
 	
 
 	gui::CreateHWindow("Cheat Menu", "Cheat Menu Class");
@@ -109,7 +113,9 @@ DWORD WINAPI MainThread(LPVOID param) {
 	gui::DestroyDevice();
 	gui::DestroyHWindow();
 
+	Actions::DeleteInstances();
 	Automations::DeleteInstances();
+	Bot::DeleteInstances();
 	Config::DeleteInstances();
 	Config::DeleteInstanceDefault();
 	DeleteGlobals();

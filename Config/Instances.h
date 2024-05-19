@@ -13,6 +13,7 @@ namespace Config {
 	extern Operation* pStartGoodsConfig;
 	extern Operation* pStartTroopsConfig;
 	extern Operation* pMarketConfig;
+	extern Operation* pUnitPropertiesConfig;
 
 	void InitializeInstances();
 	void DeleteInstances();

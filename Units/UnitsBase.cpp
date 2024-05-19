@@ -1,0 +1,6 @@
+#include "UnitsBase.h"
+
+namespace Units {
+	const char* damageLabels[] = { "Lord", "Bows Ranged", "Archer Melee", "Arab Archer Melee", "Horse Archer Melee", "Slinger Ranged", "Slinger Melee", "Xbow Ranged", "Xbow Melee", "Tunneler", "Spearman", "Pikeman", "Maceman", "Swordsman", "Knight", "Slave", "Assassin", "Arab Swordsman", "Fire Thrower Melee", NULL};
+	const char* nameLabels[] = { "NULL", "NULL", "NULL", "NULL", "NULL", "Tunneler", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "Archer", "Crossbowman", "Spearman", "Pikeman", "Maceman", "Swordsman", "Knight", "Ladderman", "Engineer", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "Monk", "NULL", "Catapult", "Trebuchet", "Mangonnel", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "Lord", "NULL", "NULL", "Siege Tower", "Battering Ram", "Shield", "Ballista", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "Arab Archer", "Slave", "Slinger", "Assassin", "Horse Archer", "Arab Swordsman", "Fire Thrower", "Fire Ballista", NULL};
+}

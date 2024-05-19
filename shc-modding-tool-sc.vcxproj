@@ -149,6 +149,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Actions\ActionsBase.h" />
+    <ClInclude Include="Actions\ActionsGameSpeed.h" />
+    <ClInclude Include="Actions\ActionsGates.h" />
+    <ClInclude Include="Actions\ActionsTents.h" />
     <ClInclude Include="addresses.h" />
     <ClInclude Include="Automations\AutomationsInstances.h" />
     <ClInclude Include="Automations\MarketAutomations.h" />
@@ -173,6 +177,7 @@
     <ClInclude Include="gui\ResourcesGui.h" />
     <ClInclude Include="gui\StartGoodsGui.h" />
     <ClInclude Include="gui\StartTroopsGui.h" />
+    <ClInclude Include="gui\UnitPropertiesGui.h" />
     <ClInclude Include="gui\UnitsGui.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
@@ -198,8 +203,14 @@
     <ClInclude Include="Start\StartResources.h" />
     <ClInclude Include="Start\StartTroops.h" />
     <ClInclude Include="Unit.h" />
+    <ClInclude Include="Units\UnitsBase.h" />
+    <ClInclude Include="Units\UnitsInstances.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Actions\ActionsBase.cpp" />
+    <ClCompile Include="Actions\ActionsGameSpeed.cpp" />
+    <ClCompile Include="Actions\ActionsGates.cpp" />
+    <ClCompile Include="Actions\ActionsTents.cpp" />
     <ClCompile Include="Automations\AutomationsInstances.cpp" />
     <ClCompile Include="Automations\MarketAutomations.cpp" />
     <ClCompile Include="Bot\BotInstances.cpp" />
@@ -222,6 +233,7 @@
     <ClCompile Include="gui\ResourcesGui.cpp" />
     <ClCompile Include="gui\StartGoodsGui.cpp" />
     <ClCompile Include="gui\StartTroopsGui.cpp" />
+    <ClCompile Include="gui\UnitPropertiesGui.cpp" />
     <ClCompile Include="gui\UnitsGui.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
@@ -248,6 +260,8 @@
     <ClCompile Include="Start\StartResources.cpp" />
     <ClCompile Include="Start\StartTroops.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="Units\UnitsBase.cpp" />
+    <ClCompile Include="Units\UnitsInstances.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

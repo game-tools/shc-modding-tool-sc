@@ -1,6 +1,8 @@
 #include <vector>
 
 #include "ActionsGui.h"
+#include "../Bot/BotInstances.h"
+#include "../Globals.h"
 
 void actionsGui::Render(std::map<DWORD, Player*> playerMap) noexcept {
 	static ImGuiTableFlags actionsTableFlags = 0;
@@ -31,4 +33,17 @@ void actionsGui::Render(std::map<DWORD, Player*> playerMap) noexcept {
 		}
 		ImGui::EndTable();
 	}
+
+	static float f1 = 1.0f;
+	*Bot::addAttackTroopsFactor = (DWORD)(f1 * 10);
+	ImGui::Text("Bot will send * factor more troops each attack");
+	ImGui::SliderFloat("Additional Attack Factor", &f1, 1.0f, 10.0f, "%.1f");
+
+	ImGui::SeparatorText("Experimental - not sure if the game will be stable all the time");
+	DWORD step2 = 1;
+	ImGui::PushItemWidth(300.0f);
+	ImGui::Text("Max Units on map - to count how many units you can recruit just divide the value by a number of alive players and subtract 40 from the result");
+	ImGui::Text("Example: 8000 / 8 (because 8 players alive) - 40 = 960");
+	ImGui::InputScalar("Max Units", ImGuiDataType_U32, pMaxUnits, &step2, NULL, "%u");
+	ImGui::PopItemWidth();
 }

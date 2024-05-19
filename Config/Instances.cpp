@@ -9,6 +9,7 @@ namespace Config {
 	Operation* pStartGoodsConfig;
 	Operation* pStartTroopsConfig;
 	Operation* pMarketConfig;
+	Operation* pUnitPropertiesConfig;
 
 	void InitializeInstances() {
 		pResourcesConfig = new Resources();
@@ -19,6 +20,7 @@ namespace Config {
 		pStartGoodsConfig = new Operation("StartGoods", false);
 		pStartTroopsConfig = new Operation("StartTroops", false);
 		pMarketConfig = new Operation("Market", true);
+		pUnitPropertiesConfig = new Operation("UnitProperties", false);
 	}
 
 	void DeleteInstances() {
@@ -30,5 +32,6 @@ namespace Config {
 		delete pStartGoodsConfig;
 		delete pStartTroopsConfig;
 		delete pMarketConfig;
+		delete pUnitPropertiesConfig;
 	}
 }
